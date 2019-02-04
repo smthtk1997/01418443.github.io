@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="style1.css">
+    <title>Lab02</title>
+    <style>
+        section{
+            margin-top: 30px;
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: nowrap;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>CSS Specificity</h1>
+        <h1>นาย ธนกฤต พลสุเจริญ 5810450733</h1>
+    </header>
+
+    <section>
+        <pre>
+Selector: *
+        <br>
+the star selector, เลือกทุกตัวใน html
+<br>
+<a href="startest.html">Click to see</a>
+
+        </pre>
+
+        <pre>
+Selector: .orange (class)
+<p class="orange">
+    ตัวแปรทุกตัวที่ใช้ class orange จะถูกเลือกให้ใช้คลาส orange
+</p>
+.orange{
+   color: orange;
+}
+        </pre>
+
+    </section>
+
+    <hr>
+
+    <section>
+         <pre>
+Selector: #pink (id)
+<p id="pink">
+    ตัวแปรทุกคัวที่ใช้ id pink จะถูกเลือกให้ใช้ (ซึ่ง id มีความสำคัญมากกว่า class)
+</p>
+#pink{
+   color: pink;
+   font-size: 18px;
+}
+        </pre>
+        <pre>
+<h4>
+Selector: h4 (tag)
+
+tag h4 ทุก tag จะถูกเลือกให้เป็นไปตาม style
+
+h4{
+color: green;
+}
+</h4>
+        </pre>
+
+    </section>
+
+    <hr>
+
+    <section>
+        <pre>
+Selector : h2,h3 (multiple tag)
+
+tag h2 และ h3 จะถูกเลือกให้ใช้ style
+<h2>
+This is h2 tag.
+</h2>
+<h3>
+This is h3 tag.
+</h3>
+h2,h3{
+color: darkblue;
+}
+        </pre>
+
+        <pre>
+Selector: div p
+
+ทุก tag p ที่อยู่ใน tag div จะถูกเลือกให้ใช้ style
+<div>
+This line not select.
+    <p>
+This line is selected.
+    </p>
+</div>
+div p {
+color: darkmagenta;
+font-size: 18px;
+}
+        </pre>
+    </section>
+    <hr>
+    <section>
+        <pre>
+Selector: div > p
+
+ทุก tag p ที่มี parent เป็น div จะถูกเลือกให้ใช้ style
+<div>
+This outside P tag will not be styled.
+    <p>
+This will be styled.
+    </p>
+</div>
+div > p{
+color: yellowgreen;
+font-size: 18px;
+}
+        </pre>
+        <pre>
+Selector: div + p
+
+ทุก tag p ที่อยู่ถัดจาก div 1 ตัว จะถูกเลือกให้ใช้ style
+<div>
+This is in tag div.
+</div>
+<p>
+This is tag p after div, it will be styled.
+</p>
+<p>
+This is second tag p after div, it will not be styled.
+</p>
+div + p{
+color: salmon;
+font-size: 18px;
+}
+        </pre>
+    </section>
+
+<section>
+    <pre>
+Selector: div ~ span
+
+ทุก tag p ที่อยู่หลัง tag div ใน parent เดียวกันจะถูกเลือกให้ใช้ style
+<div>
+This is div tag
+</div>
+<span>
+This is span tag after tag div in same parent.
+</span>
+        <br>
+<span>
+This is second tag p in the same parent.
+</span>
+div ~ span {
+background: #ffe65b;
+}
+    </pre>
+
+    <pre>
+Selector: [attribute]
+
+ทุก tag ที่มี target จะถูก style (ใช้ attribute อื่นก็ได้)
+
+<a href="https://www.google.co.th" target="_blank">www.google.co.th <<< with target</a>
+
+<a href="https://www.facebook.com/">www.facebook.co.th <<< without target</a>
+
+a[target]{
+background-color: wheat;
+}
+    </pre>
+
+</section>
+    <hr>
+<section>
+    <pre>
+Selector: [attribute=value]
+
+ทุก tag ที่มี value target จะถูกเลือกให้ style <<< ระบุได้เจาะจงกว่าแบบด้านบนที่ไม่มี value
+<a href="https://www.google.co.th" target="_top">www.google.co.th <<< with target</a>
+
+<a href="https://www.facebook.com/">www.facebook.co.th <<< without target</a>
+
+a[target=_blank]{
+background-color: aqua;
+}
+    </pre>
+
+    <pre class="select">
+Selector: p:active <<< ตัวอย่างใช้ tag p
+
+เลือกทุก tag ที่ set ไว้ จะทำอะไรบางอย่างเมื่อ click
+<p>
+ลอง click หนู
+</p>
+.select p:active{
+background-color: yellow;
+}
+    </pre>
+</section>
+    <hr>
+<section>
+    <pre class="select2">
+Selector: span::after <<< ตัวอย่างใช้ tag span
+
+เลือกทุก tag ที่ set ไว้ แล้วจะ set คำตามที่กำหนดเอาไว้
+        (before ก็มีใช้เหมือนกันแต่คำจะไปอยู่ด้านหน้า)
+<span>
+This is a paragraph
+</span>
+
+.select2 span::after{
+content: "- try to use after";
+}
+    </pre>
+
+    <pre class="select3">
+Selector: :hover  a<<< ตัวอย่างใช้ tag a
+จะเลือกให้ ทุก tag ที่กำหนด (ในที่นี้เลือก a) ทำการเปลี่ยนอะไรบางอย่างตามที่กำหนด
+เมื่อเอา cursor ไป hover (ลอยเหนือ)
+
+<a href="https://www.youtube.com">www.youtube.com ลองจี้หนูสิ</a>
+
+.select3 a:hover{
+background-color: crimson;
+}
+        </pre>
+
+</section>
+    <hr>
+    <br>
+    <div">
+        <p style="color: orange;font-size: 18px"> Selector: focus
+            <br>
+            จะกำหนด style เมื่อมีการ focus ที่จุดที่เลือก</p>
+    </div>
+    <form>
+        First name: <input type="text" name="firstname"><br>
+        Last name: <input type="text" name="lastname">
+    </form>
+    <br><br>
+</body>
+</html>

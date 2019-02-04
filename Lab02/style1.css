@@ -1,0 +1,68 @@
+section{
+    font-size: 16px;
+}
+
+header h1{
+    display: flex;
+    justify-content: space-around;
+}
+
+.orange{
+    color: orange;
+}
+
+#pink{
+    color: pink;
+    font-size: 18px;
+}
+
+h4{
+    color: green;
+}
+
+h2,h3{
+    color: #007bf0;
+}
+
+div p{
+    color: darkmagenta;
+    font-size: 18px;
+}
+
+div > p{
+    color: yellowgreen;
+    font-size: 18px;
+}
+
+div + p{
+    color: salmon;
+    font-size: 18px;
+}
+
+div ~ span {
+    background: #ffe65b;
+}
+
+a[target]{
+    background-color: wheat;
+}
+
+a[target=_top]{
+    background-color: aqua;
+}
+
+.select p:active{
+    background-color: yellow;
+}
+
+.select2 span::after{
+    content: "- try to use after";
+}
+
+.select3 a:hover{
+     background-color: crimson;
+ }
+
+input:focus{
+    background-color: darkgoldenrod;
+}
