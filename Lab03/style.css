@@ -3,18 +3,22 @@
     margin-top: 15px;
 }
 
+body{
+    font-family: 'Prompt', sans-serif;
+}
+
 .i-am-centered {
     margin: auto; max-width: 450px;
 }
 
 .smoothCSS{
-    color: #ffb800;
+    color: #ffb600;
     text-decoration: underline;
     transition: 0.5s;
 }
 
 .smoothCSS:hover{
-    color: #ff9f00;
+    color: #ff9900;
     cursor: pointer;
     font-size: 14px;
 }
