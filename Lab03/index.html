@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Search Program</title>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <div>
+            <head>
+                <h1 style="text-align: center;margin: 20px 20px 10px 10px">Airport Search System</h1>
+            </head>
+            <div class="i-am-centered">
+                <div class="row">
+                    <div class="col-md-9 col-sm-12">
+                        <input type="text" class="form-control inputbar" id="searchbox" style="border: 2px solid #009ac8;border-radius: 10px" aria-describedby="emailHelp" placeholder="Enter Name">
+                    </div>
+                    <div class="col-md-3 col-sm-12">
+                        <button class="btn btn-outline-success inputbar" id="searchButton">Enter</button>
+                    </div>
+                </div>
+                <div style="display: none" id="advance">
+                    <div class="row">
+                        <div class="col-md-9 col-sm-12">
+                            <input type="text" style="border: 2px solid #ffb800;border-radius: 10px" class="form-control inputbar" id="codeSearch" placeholder="Code">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-9 col-sm-12">
+                            <input type="text" style="border: 2px solid #ffb800;border-radius: 10px" class="form-control inputbar" id="citySearch" placeholder="City">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-9 col-sm-12">
+                            <input type="text" style="border: 2px solid #ffb800;border-radius: 10px" class="form-control inputbar" id="countrySearch" placeholder="Country">
+                        </div>
+                    </div>
+                </div>
+                <div class="mt-3">
+                    <small class="smoothCSS" id="showadvance"><span id="advText">Show</span> Advanced Search <span id="updown"><i class="fas fa-sort-down"></i></span></small>
+                </div>
+            </div>
+            <br>
+            <table class="table table-hover" id="myTable" style="margin-bottom: 200px">
+                <thead>
+                <tr>
+                    <th scope="col">Code</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">City</th>
+                    <th scope="col">Country</th>
+                </tr>
+                </thead>
+            </table>
+        </div>
+
+
+
+    </div>
+
+    <script>
+        $(document).ready(function () {
+            var arrayAirport;
+            $.getJSON("countries.json",function(data){
+                arrayAirport = [];
+                $.each(data, function (key, val) {
+                    arrayAirport.push(("<tr>"));
+                    arrayAirport.push("<td id='code'>"+val.iata_code+"</td>");
+                    arrayAirport.push("<td id='name'>"+val.name+"</td>");
+                    arrayAirport.push("<td id='city'>"+val.city+"</td>");
+                    arrayAirport.push("<td id='country'>"+val.country+"</td>");
+                    arrayAirport.push("</tr>");
+                });
+                $("<tbody>", {html: arrayAirport.join("")}).appendTo("table");
+            });
+
+
+            // ----------------
+            $("#searchbox").on('keyup keydown',function(){
+                $("#searchbox").val($("#searchbox").val().toLowerCase());
+            });
+            $("#codeSearch").on('keyup keydown',function(){
+                $("#codeSearch").val($("#codeSearch").val().toLowerCase());
+            });
+            $("#citySearch").on('keyup keydown',function(){
+                $("#citySearch").val($("#citySearch").val().toLowerCase());
+            });
+            $("#countrySearch").on('keyup keydown',function(){
+                $("#countrySearch").val($("#countrySearch").val().toLowerCase());
+            });
+            // ----------------
+
+            $("#searchButton").click(function () {
+                // console.log($("#searchbox").val()+" , "+$("#codeSearch").val()+" , "+$("#citySearch").val()+" , "+$("#countrySearch").val());
+                $.getJSON("countries.json",function(data){
+                    arrayAirport = [];
+                    $.each(data, function (key, val) {
+                        if(val.name.toLowerCase().indexOf($("#searchbox").val()) >= 0
+                            && val.iata_code.toLowerCase().indexOf($("#codeSearch").val()) >= 0
+                            && val.city.toLowerCase().indexOf($("#citySearch").val()) >= 0
+                            && val.country.toLowerCase().indexOf($("#countrySearch").val()) >= 0 ){
+
+                            // console.log(val.name);
+
+                            arrayAirport.push(("<tr>"));
+                            arrayAirport.push("<td id='code'>"+val.iata_code+"</td>");
+                            arrayAirport.push("<td id='name'>"+val.name+"</td>");
+                            arrayAirport.push("<td id='city'>"+val.city+"</td>");
+                            arrayAirport.push("<td id='country'>"+val.country+"</td>");
+                            arrayAirport.push("</tr>");
+                        }
+                    });
+
+                    $("tbody").html("");
+                    $("tbody").append(arrayAirport);
+
+                });
+            });
+
+            $('#showadvance').click(function () { // เลื่อน Advance
+                if ($('#advance:first').is(":hidden")){
+                    $('#advance').slideDown('slow');
+                    $('#advText').text('Hide');
+                    $('#updown').html('<i class="fas fa-sort-up"></i>');
+
+                }else{
+                    $('#advance').slideUp('slow');
+                    $('#advText').text('Show');
+                    $('#updown').html('<i class="fas fa-sort-down"></i>');
+                }
+            });
+        });
+
+    </script>
+
+
+</body>
+</html>
